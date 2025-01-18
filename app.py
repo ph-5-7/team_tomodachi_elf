@@ -1,3 +1,9 @@
+# Show Code ボタンを無効化
+import streamlit as st
+
+st.set_page_config(page_title="チームともだち♡管理ツール", layout="wide", initial_sidebar_state="collapsed")
+
+
 import streamlit as st
 from utils import load_all_data
 import modules.warehouse as warehouse
