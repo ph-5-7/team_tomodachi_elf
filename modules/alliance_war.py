@@ -4,7 +4,7 @@ import pandas as pd  # pandasモジュールをインポート
 from utils import get_end_of_day
 
 def show_page(df):
-    st.subheader("⚔️ 同盟戦データ（倉庫履歴から自動集計）")
+    st.subheader("⚔️ 同盟戦データ")
 
     with st.expander("⚙️ **検索画面を開く❣**"):
         # 📅 同盟戦の開始日と終了日
