@@ -24,12 +24,14 @@ def show_admin_page():
             # ディレクトリが存在しない場合は作成
             if not os.path.exists(DATA_DIR):
                 os.makedirs(DATA_DIR)
+                st.info(f"データフォルダを作成しました: {os.path.abspath(DATA_DIR)}")
 
             # 保存処理
             file_path = os.path.join(DATA_DIR, uploaded_file.name)
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
             st.success(f"ファイルが正常に保存されました！ ({file_path})")
+            st.write(f"保存されたファイルの絶対パス: {os.path.abspath(file_path)}")
 
         # 📂 保存されたファイルを表示
         if st.button("📂 保存されたファイルを表示"):
