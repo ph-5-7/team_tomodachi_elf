@@ -1,12 +1,12 @@
 # Show Code ボタンを無効化
 import streamlit as st
-from utils import load_all_data
+
+st.set_page_config(page_title="チームともだち♡管理ツール", layout="wide", initial_sidebar_state="collapsed")
+
 import modules.warehouse as warehouse
 import modules.alliance_war as alliance_war
-import modules.admin as admin  # 管理者ページをインポート
-
-# ページ設定
-st.set_page_config(page_title="チームともだち♡管理ツール", layout="wide", initial_sidebar_state="collapsed")
+import modules.admin as admin
+from utils import load_all_data
 
 # データフォルダを指定
 data_dir = "data"
@@ -26,4 +26,4 @@ if page == "倉庫履歴":
 elif page == "同盟戦データ":
     alliance_war.show_page(df)
 elif page == "管理者ページ":
-    admin.show_page()  # 管理者ページを表示
+    admin.show_admin_page()
