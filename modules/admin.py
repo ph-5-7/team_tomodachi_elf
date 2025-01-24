@@ -4,8 +4,8 @@ import os
 # 管理者ページのパスワード
 ADMIN_PASSWORD = "bbb"  # 適宜パスワードを変更してください
 
-# データ保存先フォルダ（ローカルの絶対パスに修正）
-DATA_DIR = "C:/Users/yamat/project/data"  # ローカルの絶対パスに変更
+# データ保存先フォルダ（ローカルの絶対パスを指定）
+DATA_DIR = r"C:\Users\yamat\project\data"
 
 def show_admin_page():
     # パスワード入力
@@ -45,3 +45,4 @@ def show_admin_page():
                 st.write("保存されているファイルはありません。")
     elif password:  # 入力がある場合、エラーを表示
         st.error("パスワードが間違っています！")
+
