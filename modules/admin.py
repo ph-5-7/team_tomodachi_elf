@@ -1,7 +1,11 @@
 import streamlit as st
+import os
 
 # 管理者ページのパスワード
 ADMIN_PASSWORD = "admin123"  # 適宜パスワードを変更してください
+
+# データ保存先フォルダ
+DATA_DIR = "data"
 
 def show_admin_page():
     # パスワード入力
@@ -16,9 +20,15 @@ def show_admin_page():
         uploaded_file = st.file_uploader("📁 CSVファイルをアップロード", type=["csv"])
         if uploaded_file is not None:
             st.write(f"アップロードされたファイル: {uploaded_file.name}")
+
+            # ディレクトリが存在しない場合は作成
+            if not os.path.exists(DATA_DIR):
+                os.makedirs(DATA_DIR)
+
             # 保存処理
-            with open(f"data/{uploaded_file.name}", "wb") as f:
+            file_path = os.path.join(DATA_DIR, uploaded_file.name)
+            with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
-            st.success("ファイルが正常に保存されました！")
+            st.success(f"ファイルが正常に保存されました！ ({file_path})")
     elif password:  # 入力がある場合、エラーを表示
         st.error("パスワードが間違っています！")
