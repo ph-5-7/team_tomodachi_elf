@@ -2,12 +2,12 @@ import streamlit as st
 import os
 
 # 管理者ページのパスワード
-ADMIN_PASSWORD = "bbb"  # 適宜パスワードを変更してください
+ADMIN_PASSWORD = "bbb"  # パスワードを適宜変更してください
 
-# データ保存先フォルダ（ローカルの絶対パスを指定）
-DATA_DIR = r"C:\Users\yamat\project\data"
+def show_admin_page(DATA_DIR):
+    # 現在の保存先パスを表示
+    st.write(f"現在のデータ保存先パス: {os.path.abspath(DATA_DIR)}")
 
-def show_admin_page():
     # パスワード入力
     password = st.text_input("🔑 パスワードを入力", type="password")
 
@@ -15,9 +15,6 @@ def show_admin_page():
         st.success("ログイン成功！")
         st.subheader("⚙️ 管理者ページ")
         st.write("ここに管理者専用の機能を追加します。")
-
-        # 現在のデータ保存先パスを表示（確認用）
-        st.write(f"現在のデータ保存先パス: {os.path.abspath(DATA_DIR)}")
 
         # CSVファイルアップロード機能
         uploaded_file = st.file_uploader("📁 CSVファイルをアップロード", type=["csv"])
@@ -30,11 +27,14 @@ def show_admin_page():
 
             # 保存処理
             file_path = os.path.join(DATA_DIR, uploaded_file.name)
-            with open(file_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            st.success(f"ファイルが正常に保存されました！ ({file_path})")
+            try:
+                with open(file_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                st.success(f"ファイルが正常に保存されました！ ({file_path})")
+            except Exception as e:
+                st.error(f"ファイルの保存中にエラーが発生しました: {e}")
 
-        # 📂 保存されたファイルを表示
+        # 保存されたファイルを表示
         if st.button("📂 保存されたファイルを表示"):
             saved_files = os.listdir(DATA_DIR) if os.path.exists(DATA_DIR) else []
             if saved_files:
