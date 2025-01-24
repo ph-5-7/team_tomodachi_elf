@@ -29,7 +29,7 @@ elif page == "管理者用ページ":
     st.subheader("🔒 管理者用ページ")
 
     # パスワード設定
-    admin_password = "your_secure_password"  # 管理者用パスワードを設定
+    admin_password = "bbb"  # 管理者用パスワードを設定
     entered_password = st.text_input("パスワードを入力してください", type="password")
 
     # パスワード認証
