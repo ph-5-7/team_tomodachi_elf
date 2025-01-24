@@ -2,7 +2,7 @@ import streamlit as st
 import os
 
 # 管理者ページのパスワード
-ADMIN_PASSWORD = "admin123"  # 適宜パスワードを変更してください
+ADMIN_PASSWORD = "bbb"  # 適宜パスワードを変更してください
 
 # データ保存先フォルダ
 DATA_DIR = "data"
@@ -30,5 +30,15 @@ def show_admin_page():
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
             st.success(f"ファイルが正常に保存されました！ ({file_path})")
+
+        # 📂 保存されたファイルを表示
+        if st.button("📂 保存されたファイルを表示"):
+            saved_files = os.listdir(DATA_DIR) if os.path.exists(DATA_DIR) else []
+            if saved_files:
+                st.write("保存されているファイル:")
+                for file in saved_files:
+                    st.write(f"- {file}")
+            else:
+                st.write("保存されているファイルはありません。")
     elif password:  # 入力がある場合、エラーを表示
         st.error("パスワードが間違っています！")
